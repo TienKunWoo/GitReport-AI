@@ -5,6 +5,15 @@
   "version": "0.0.1",
   "publisher": "gitreport-ai",
   "license": "AGPL-3.0",
+  "icon": "icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/gitreport-ai.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/gitreport-ai/issues"
+  },
+  "homepage": "https://github.com/yourusername/gitreport-ai#readme",
   "engines": {
     "vscode": "^1.60.0"
   },
