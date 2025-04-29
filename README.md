@@ -24,9 +24,9 @@
 
 在 VS Code 设置中配置以下选项：
 
-- `weekly-assistant.reportStartDate`: 报告开始日期 (YYYY-MM-DD)
-- `weekly-assistant.reportEndDate`: 报告结束日期 (YYYY-MM-DD)
-- `weekly-assistant.deepseekApiKey`: DeepSeek API Key
+- `gitreport-ai.reportStartDate`: 报告开始日期 (YYYY-MM-DD)
+- `gitreport-ai.reportEndDate`: 报告结束日期 (YYYY-MM-DD)
+- `gitreport-ai.deepseekApiKey`: DeepSeek API Key
 
 ## 问题反馈
 
