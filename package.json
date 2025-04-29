@@ -1,0 +1,72 @@
+{
+  "name": "gitreport-ai",
+  "displayName": "GitReport AI / 智写工作报告",
+  "description": "基于 Git 提交记录，使用 AI 智能生成工作报告的 VS Code 插件",
+  "version": "0.0.1",
+  "publisher": "gitreport-ai",
+  "license": "AGPL-3.0",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:gitreport-ai.generateReport"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "gitreport-ai.generateReport",
+        "title": "生成工作报告"
+      }
+    ],
+    "configuration": {
+      "title": "GitReport AI",
+      "properties": {
+        "gitreport-ai.reportStartDate": {
+          "type": "string",
+          "default": "",
+          "description": "报告开始日期 (YYYY-MM-DD)",
+          "order": 1
+        },
+        "gitreport-ai.reportEndDate": {
+          "type": "string",
+          "default": "",
+          "description": "报告结束日期 (YYYY-MM-DD)",
+          "order": 2
+        },
+        "gitreport-ai.deepseekApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "DeepSeek API Key",
+          "order": 3
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.60.0",
+    "@typescript-eslint/eslint-plugin": "^5.30.0",
+    "@typescript-eslint/parser": "^5.30.0",
+    "eslint": "^8.13.0",
+    "husky": "^9.1.7",
+    "typescript": "^4.7.2"
+  },
+  "dependencies": {
+    "axios": "^1.6.7",
+    "simple-git": "^3.15.1"
+  }
+}
