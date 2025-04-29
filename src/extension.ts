@@ -58,7 +58,20 @@ async function getDeepSeekSummary(commits: string, progress: vscode.Progress<{ m
     const apiKey = config.get<string>('deepseekApiKey');
 
     if (!apiKey) {
-        throw new Error('请先在设置中配置 DeepSeek API Key');
+        // 弹窗提示用户，并引导去设置
+        const action = await vscode.window.showErrorMessage(
+            '未检测到 DeepSeek API Key，无法生成周报。请先在设置中填写 API Key。',
+            '去设置'
+        );
+        if (action === '去设置') {
+            // 跳转到插件设置页面，方便用户直接填写
+            await vscode.commands.executeCommand(
+                'workbench.action.openSettings',
+                '@ext:gitreport-ai'
+            );
+        }
+        // 终止后续流程，防止后面报错
+        throw new Error('未配置 DeepSeek API Key');
     }
 
     progress.report({ message: "正在使用 AI 生成周报摘要...", increment: 50 });
@@ -92,6 +105,19 @@ async function getDeepSeekSummary(commits: string, progress: vscode.Progress<{ m
         progress.report({ message: "AI 摘要生成完成", increment: 20 });
         return response.data.choices[0].message.content;
     } catch (error) {
+        // 优化错误提示，提供更友好的错误信息
+        if (axios.isAxiosError(error) && error.response?.status === 401) {
+            const action = await vscode.window.showErrorMessage(
+                'DeepSeek API Key 无效，请检查并更新 API Key。',
+                '去设置'
+            );
+            if (action === '去设置') {
+                await vscode.commands.executeCommand(
+                    'workbench.action.openSettings',
+                    '@ext:gitreport-ai'
+                );
+            }
+        }
         throw new Error(`调用 DeepSeek API 失败: ${error}`);
     }
 }
