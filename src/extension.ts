@@ -54,7 +54,7 @@ function formatDate(date: Date): string {
 }
 
 async function getDeepSeekSummary(commits: string, progress: vscode.Progress<{ message?: string; increment?: number }>): Promise<string> {
-    const config = vscode.workspace.getConfiguration('weekly-assistant');
+    const config = vscode.workspace.getConfiguration('gitreport-ai');
     const apiKey = config.get<string>('deepseekApiKey');
 
     if (!apiKey) {
@@ -266,7 +266,7 @@ async function handleDateSelection(defaultDates: { startDate: string, endDate: s
 }
 
 export function activate(context: vscode.ExtensionContext) {
-    let disposable = vscode.commands.registerCommand('weekly-assistant.generateReport', async () => {
+    let disposable = vscode.commands.registerCommand('gitreport-ai.generateReport', async () => {
         try {
             // 使用 withProgress API 显示进度
             await vscode.window.withProgress({
@@ -282,7 +282,7 @@ export function activate(context: vscode.ExtensionContext) {
                     return;
                 }
 
-                const config = vscode.workspace.getConfiguration('weekly-assistant');
+                const config = vscode.workspace.getConfiguration('gitreport-ai');
                 let startDate = config.get<string>('reportStartDate');
                 let endDate = config.get<string>('reportEndDate');
                 let useDefaultDates = false;
