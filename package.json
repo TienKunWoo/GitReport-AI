@@ -21,7 +21,6 @@
     "Other"
   ],
   "activationEvents": [
-    "*",
     "onCommand:gitreport-ai.generateReport"
   ],
   "main": "./out/extension.js",
@@ -57,6 +56,7 @@
     }
   },
   "scripts": {
+    "build": "vsce package",
     "vscode:prepublish": "npx webpack --mode production",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
